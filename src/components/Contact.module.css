@@ -1,0 +1,127 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.infoCol h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.divider {
+    width: 60px;
+    height: 4px;
+    background: var(--color-gold);
+    margin-bottom: 30px;
+}
+
+.intro {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.details {
+    display: grid;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.detailItem h4 {
+    color: var(--color-gold);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detailItem p {
+    color: #fff;
+    line-height: 1.5;
+}
+
+.highlight {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.qrPlaceholder {
+    width: 100px;
+    height: 100px;
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid var(--color-gold);
+}
+
+.socials h4 {
+    margin-bottom: 15px;
+    color: var(--color-gold);
+}
+
+.socialIcons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.icon {
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.icon:hover {
+    background: var(--color-gold);
+    color: #000;
+    border-color: var(--color-gold);
+}
+
+.mapFrame {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mapPlaceholder {
+    width: 100%;
+    height: 100%;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 80px;
+    padding-top: 40px;
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mapFrame {
+        min-height: 300px;
+    }
+}

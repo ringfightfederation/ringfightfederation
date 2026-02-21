@@ -1,0 +1,125 @@
+.header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.divider {
+    width: 60px;
+    height: 3px;
+    background: var(--color-gold);
+    margin: 20px auto 0;
+}
+
+.masonry {
+    column-count: 3;
+    column-gap: 20px;
+}
+
+.item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.placeholderImg {
+    width: 100%;
+    height: 300px;
+    /* Varied heights would be better for masonry look */
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-dim);
+    transition: transform 0.3s ease;
+}
+
+.item:nth-child(even) .placeholderImg {
+    height: 400px;
+}
+
+.item:hover .placeholderImg {
+    transform: scale(1.05);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.item:hover .overlay {
+    opacity: 1;
+}
+
+.viewIcon {
+    border: 1px solid var(--color-gold);
+    padding: 8px 16px;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightboxContent {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightboxPlaceholder {
+    width: 80vw;
+    height: 80vh;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-size: 2rem;
+}
+
+.closeBtn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .masonry {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .masonry {
+        column-count: 1;
+    }
+}

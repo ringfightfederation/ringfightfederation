@@ -1,27 +1,26 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Color Palette */
+  --color-black: #0A0A0A;
+  --color-charcoal: #1C1C1C;
+  --color-gold: #D4AF37;
+  --color-crimson: #8B0000;
+  --color-white: #FFFFFF;
+  --color-text-dim: rgba(255, 255, 255, 0.7);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* Gradients */
+  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #AA8A2E 100%);
+  --gradient-dark: linear-gradient(to bottom, #0A0A0A, #1C1C1C);
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  /* Typography - Will be set by next/font */
+  /* --font-heading is set in layout.js */
+  /* --font-body is set in layout.js */
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Spacing */
+  --spacing-container: 1200px;
+  --spacing-section: 80px;
+
+  /* Transitions */
+  --transition-smooth: all 0.4s ease-in-out;
 }
 
 * {
@@ -30,13 +29,97 @@ body {
   margin: 0;
 }
 
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-body);
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* Utilities */
+.container {
+  max-width: var(--spacing-container);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: var(--spacing-section) 0;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+h1 { font-size: 4rem; }
+h2 { font-size: 3rem; color: var(--color-gold); }
+h3 { font-size: 2rem; }
+
+p {
+  line-height: 1.6;
+  color: var(--color-text-dim);
+  margin-bottom: 1rem;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Gold Underline Animation */
+.hover-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-gold);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.hover-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-charcoal);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
 }

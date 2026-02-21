@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# macOS junk files
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+Icon?
+._.DS_Store
