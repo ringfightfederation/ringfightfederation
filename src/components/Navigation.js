@@ -5,69 +5,53 @@ import Link from "next/link";
 import styles from "./Navigation.module.css";
 import Button from "./Button";
 
+const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
 const MENU_ITEMS = [
     {
         label: "HOME",
-        href: "/",
+        sectionId: "home",
         submenu: [
-            { label: "About Us", href: "#about" },
-            { label: "History of Ring Fight", href: "#history" },
-            { label: "Founder", href: "#founder" }
+            { label: "About Us", sectionId: "about" },
+            { label: "Founder", sectionId: "founder" },
         ]
     },
     {
         label: "MEMBERS",
-        href: "#members",
+        sectionId: "governing-body",
         submenu: [
-            { label: "International", href: "#international" },
-            { label: "National", href: "#national" },
-            { label: "Officials", href: "#officials" }
+            { label: "International", sectionId: "affiliations" },
+            { label: "Indian Governing Body", sectionId: "governing-body" },
         ]
     },
     {
         label: "GALLERY",
-        href: "#gallery",
+        sectionId: "gallery",
         submenu: [
-            { label: "Photo", href: "#photos" },
-            { label: "Video", href: "#videos" },
-            { label: "Media", href: "#media" }
+            { label: "Photo Gallery", sectionId: "gallery" },
         ]
     },
     {
         label: "RULES & REGULATIONS",
-        href: "#rules",
+        sectionId: "game-structure",
         submenu: [
-            { label: "Rule Book", href: "#rule-book" },
-            { label: "Score Sheet", href: "#score-sheet" },
-            { label: "Draw Sheet", href: "#draw-sheet" },
-            { label: "Medal List", href: "#medal-list" }
+            { label: "Game Structure", sectionId: "game-structure" },
+            { label: "Rope Duel Rules", sectionId: "rope-duel" },
         ]
     },
     {
         label: "CHAMPIONSHIPS",
-        href: "#championships",
+        sectionId: "championships",
         submenu: [
-            { label: "National", href: "#nat-champs" },
-            { label: "International", href: "#int-champs" },
-            { label: "Downloads", href: "#downloads" },
-            { label: "Recognitions", href: "#recognitions" },
-            { label: "Application Form", href: "#form" },
-            { label: "Result", href: "#results" }
-        ]
-    },
-    {
-        label: "AFFILIATIONS",
-        href: "#affiliations",
-        submenu: [
-            { label: "International Federation", href: "#int-fed" },
-            { label: "Indian Governing Body", href: "#ind-fed" },
-            { label: "Federation Heads", href: "#heads" },
-            { label: "Referee Board", href: "#referees" }
+            { label: "National", sectionId: "championships" },
         ]
     },
     {
         label: "CONTACT US",
-        href: "#contact"
+        sectionId: "contact",
     }
 ];
 
@@ -84,6 +68,16 @@ export default function Navigation() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const handleNavClick = (item) => {
+        if (item.sectionId === 'home') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (item.sectionId) {
+            scrollTo(item.sectionId);
+        }
+        setMobileMenuOpen(false);
+        setActiveSubmenu(null);
+    };
+
     const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
     const toggleSubmenu = (index) => {
         setActiveSubmenu(activeSubmenu === index ? null : index);
@@ -92,24 +86,34 @@ export default function Navigation() {
     return (
         <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`}>
             <div className={styles.container}>
-                <Link href="/" className={styles.logo}>
+                <button
+                    className={styles.logo}
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
                     IRFF <span className={styles.tm}>&trade;</span>
-                </Link>
+                </button>
 
                 {/* Desktop Menu */}
                 <ul className={styles.desktopMenu}>
                     {MENU_ITEMS.map((item, index) => (
                         <li key={index} className={styles.menuItem}>
-                            <Link href={item.href} className={styles.menuLink}>
-                                {item.label}
-                            </Link>
+                            {item.href ? (
+                                <Link href={item.href} className={styles.menuLink}>{item.label}</Link>
+                            ) : (
+                                <button className={styles.menuLink} onClick={() => handleNavClick(item)}>
+                                    {item.label}
+                                </button>
+                            )}
                             {item.submenu && (
                                 <ul className={styles.dropdown}>
                                     {item.submenu.map((sub, subIndex) => (
                                         <li key={subIndex}>
-                                            <Link href={sub.href} className={styles.dropdownLink}>
+                                            <button
+                                                className={styles.dropdownLink}
+                                                onClick={() => handleNavClick(sub)}
+                                            >
                                                 {sub.label}
-                                            </Link>
+                                            </button>
                                         </li>
                                     ))}
                                 </ul>
@@ -119,7 +123,7 @@ export default function Navigation() {
                 </ul>
 
                 <div className={styles.actions}>
-                    <Button variant="outline" href="#join" className={styles.joinBtn}>Join</Button>
+                    <Button variant="outline" onClick={() => scrollTo("contact")} className={styles.joinBtn}>Join</Button>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -135,9 +139,15 @@ export default function Navigation() {
                         {MENU_ITEMS.map((item, index) => (
                             <li key={index} className={styles.mobileItem}>
                                 <div className={styles.mobileHeader} onClick={() => toggleSubmenu(index)}>
-                                    <Link href={item.href} className={styles.mobileLink}>
-                                        {item.label}
-                                    </Link>
+                                    {item.href ? (
+                                        <Link href={item.href} className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>
+                                            {item.label}
+                                        </Link>
+                                    ) : (
+                                        <button className={styles.mobileLink} onClick={() => handleNavClick(item)}>
+                                            {item.label}
+                                        </button>
+                                    )}
                                     {item.submenu && (
                                         <span className={`${styles.arrow} ${activeSubmenu === index ? styles.rotate : ""}`}>▼</span>
                                     )}
@@ -146,9 +156,12 @@ export default function Navigation() {
                                     <ul className={`${styles.mobileDropdown} ${activeSubmenu === index ? styles.show : ""}`}>
                                         {item.submenu.map((sub, subIndex) => (
                                             <li key={subIndex}>
-                                                <Link href={sub.href} className={styles.mobileDropdownLink} onClick={() => setMobileMenuOpen(false)}>
+                                                <button
+                                                    className={styles.mobileDropdownLink}
+                                                    onClick={() => handleNavClick(sub)}
+                                                >
                                                     {sub.label}
-                                                </Link>
+                                                </button>
                                             </li>
                                         ))}
                                     </ul>

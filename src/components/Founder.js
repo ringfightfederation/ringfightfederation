@@ -58,8 +58,12 @@ export default function Founder() {
                 <div className={styles.content}>
                     <div className={styles.imageFrame}>
                         <div className={styles.founderImage}>
-                            {/* Placeholder */}
-                            <span>Tadem Ravi Kumar</span>
+                            <Image
+                                src="/assets/founder.jpeg"
+                                alt="Tadem Ravi Kumar - Founder & President"
+                                fill
+                                style={{ objectFit: 'cover', borderRadius: '8px' }}
+                            />
                         </div>
                         <div className={styles.goldBorder}></div>
                     </div>

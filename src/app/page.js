@@ -8,7 +8,6 @@ import GoverningBody from "@/components/GoverningBody";
 import Affiliations from "@/components/Affiliations";
 import Championships from "@/components/Championships";
 import Gallery from "@/components/Gallery";
-import Downloads from "@/components/Downloads";
 import Contact from "@/components/Contact";
 
 export default function Home() {
@@ -24,7 +23,6 @@ export default function Home() {
       <Affiliations />
       <Championships />
       <Gallery />
-      <Downloads />
       <Contact />
     </main>
   );

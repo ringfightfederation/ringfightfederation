@@ -48,10 +48,16 @@ export default function Contact() {
 
                 <div className={styles.mapCol}>
                     <div className={styles.mapFrame}>
-                        {/* Google Map Placeholder */}
-                        <div className={styles.mapPlaceholder}>
-                            Google Map Embed
-                        </div>
+                        <iframe
+                            title="IRFF Headquarters Location"
+                            src="https://maps.google.com/maps?q=Boyawada,Ramagiri,Nalgonda,Telangana,India&output=embed&z=13"
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0, minHeight: '400px' }}
+                            allowFullScreen=""
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                        />
                     </div>
                 </div>
             </div>
