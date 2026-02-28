@@ -19,10 +19,8 @@ export default function Hero() {
                 muted
                 playsInline
                 className={styles.video}
-                poster="/assets/hero-poster.jpg"
             >
-                <source src="/assets/hero-bg.mp4" type="video/mp4" />
-                {/* Fallback text or image if video fails is handled by poster */}
+                <source src="/assets/hero-video.mp4" type="video/mp4" />
             </video>
 
             <div className={styles.content}>
